@@ -7,4 +7,5 @@ Flutter App
 
 ## Backend
 
-I used Python Flask as the backend and SQL database for the blog section, and for the news to be fetched I used NewsApi.
+I used here Python Flask as the backend for the application and SQL database for the blog section, and for the news to be fetched I used NewsApi.
+
