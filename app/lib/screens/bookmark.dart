@@ -29,7 +29,12 @@ class _BookmarkState extends State<Bookmark> {
 
 
   }
-
+@override
+  void didUpdateWidget(Bookmark oldWidget) {
+    // TODO: implement didUpdateWidget
+    _fetchData();
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {

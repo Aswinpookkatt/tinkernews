@@ -13,10 +13,12 @@ class Blog{
 
   Future<void> getBlog() async {
     String url = "http://${ip}:5000/api/news";
+    String hosted = "https://tinkernews.herokuapp.com/api/fetch";
 
-    var response = await http.get(url);
+    var response = await http.get(hosted);
 
     var jsonData = jsonDecode(response.body);
+
 
     if (jsonData['status'] == "ok") {
       jsonData["articles"].forEach((element) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/backend/blogService.dart';
+import 'package:news_app/screens/splashscreen.dart';
 import 'package:news_app/widgets/BlogTile.dart';
+
 
 
 class TinkerBlog extends StatefulWidget {
@@ -9,8 +11,8 @@ class TinkerBlog extends StatefulWidget {
 }
 
 class _TinkerBlogState extends State<TinkerBlog> with SingleTickerProviderStateMixin {
+  List<Map<String,dynamic>> queryRows;
 
-  var Bloglist;
   bool _loading;
 
   void getBlog() async {
@@ -29,9 +31,18 @@ class _TinkerBlogState extends State<TinkerBlog> with SingleTickerProviderStateM
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loading = true;
-    // second.getNews();
-    getBlog();
+   if(Bloglist==null){
+    setState(() {
+      _loading=true;
+    });
+     getBlog();
+   }
+   else{
+     setState(() {
+       _loading= false;
+     });
+
+   }
 
 
   }

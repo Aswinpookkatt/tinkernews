@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/backend/services.dart';
+import 'package:news_app/models/bookmarkdb.dart';
 import 'package:news_app/widgets/NewsTile.dart';
-
+import 'package:toast/toast.dart';
+var headlines;
 class Buzz extends StatefulWidget {
   @override
   _BuzzState createState() => _BuzzState();
@@ -9,7 +11,7 @@ class Buzz extends StatefulWidget {
 
 class _BuzzState extends State<Buzz> with SingleTickerProviderStateMixin  {
 
-  var newslist;
+
   bool _loading;
 
   void getNews() async {
@@ -17,7 +19,7 @@ class _BuzzState extends State<Buzz> with SingleTickerProviderStateMixin  {
     News news = News();
     //print(widget.text);
     await news.getNews("general");
-    newslist = news.news;
+    headlines = news.news;
 
     setState(() {
       _loading = false;
@@ -28,9 +30,15 @@ class _BuzzState extends State<Buzz> with SingleTickerProviderStateMixin  {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loading = true;
-    // second.getNews();
-    getNews();
+
+    if(headlines==null){
+      _loading = true;
+      getNews();
+    }
+    else{
+      _loading =false;
+    }
+
 
 
   }
@@ -44,8 +52,8 @@ class _BuzzState extends State<Buzz> with SingleTickerProviderStateMixin  {
         leading: Image.asset("assets/images/icon.jpg"),
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text("What's Buzzing",style: TextStyle(
-          color: Colors.black,fontFamily: "FallingSky",fontSize: 23,
+        title: Text("News Headlines",style: TextStyle(
+          color: Colors.black,fontFamily: "FallingSky",fontSize: 23,fontWeight: FontWeight.bold
         ),),
 
 
@@ -63,20 +71,22 @@ class _BuzzState extends State<Buzz> with SingleTickerProviderStateMixin  {
                 /// News Article
                 Container(
                   margin: EdgeInsets.only(top: 16),
-                  child: ListView.builder(
-                      itemCount: newslist.length,
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return NewsTile(
-                          imgUrl: newslist[index].urlToImage ?? "",
-                          title: newslist[index].title ?? "",
-                          desc: newslist[index].description ?? "",
-                          content: newslist[index].content ?? "",
-                          //posturl: newslist[index].articleUrl ?? "",
-                          date : newslist[index].Date ?? "",
-                        );
-                      }),
+                    child: ListView.builder(
+                        itemCount: headlines.length,
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return NewsTile(
+                            imgUrl: headlines[index].urlToImage ?? "",
+                            title: headlines[index].title ?? "",
+                            desc: headlines[index].description ?? "",
+                            content: headlines[index].content ?? "",
+                            //posturl: newslist[index].articleUrl ?? "",
+                            date : headlines[index].Date ?? "",
+
+                          );
+                        }),
+
                 ),
 
               ],

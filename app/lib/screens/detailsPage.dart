@@ -6,6 +6,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:news_app/models/bookmarkdb.dart';
 import 'package:toast/toast.dart';
 
+import 'bookmark.dart';
+
 
 
 class DetailsPage extends StatefulWidget {
@@ -22,6 +24,8 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  List<Map<String,dynamic>> queryRows;
+  int copyId;
   //BookmarkHelper _bookmarkHelper =  BookmarkHelper();
   final FlutterTts _flutterTts = FlutterTts();
   var ttsState,_bookmarkadded=false;
@@ -81,31 +85,38 @@ class _DetailsPageState extends State<DetailsPage> {
 
   _insertBookmark() async{
 
-    int i = await BookmarkHelper.instance.insert({
+     int  i = await BookmarkHelper.instance.insert({
       BookmarkHelper.columnTitle: widget.newstitle,
       BookmarkHelper.columnDate : widget.postdate,
       BookmarkHelper.columnImg : widget.imageUrl,
       BookmarkHelper.columnContent : widget.newscontent,
       BookmarkHelper.columnPressed : "true"
     });
+     copyId = i;
     print('THE INSERTED ID IS $i');
 
     setState(() {
       _icon_bookmark = Icon(Icons.bookmark,color: Colors.green[800],);
+      _bookmarkadded = true;
     });
-    _bookmarkadded = true;
+
   }
 
   _deleteBookmark(int i)async{
     int rowsAffected= await BookmarkHelper.instance.delete(i);
+    print(rowsAffected);
     print("removed from bookmark");
    setState(() {
      _icon_bookmark = Icon(Icons.bookmark_border,color: Colors.green[800],);
+     _bookmarkadded = false;
    });
-    _bookmarkadded = false;
+
   }
-
-
+ @override
+  void didUpdateWidget(DetailsPage oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +136,6 @@ class _DetailsPageState extends State<DetailsPage> {
       if (result == 1) setState(() => _playing = false);
 
     }
-
-
 
 
     return WillPopScope(
@@ -182,12 +191,19 @@ class _DetailsPageState extends State<DetailsPage> {
 
 
                                     if(_bookmarkadded == false && widget.pressed!="true"){
+
                                        _insertBookmark();
+                                       _bookmarkadded = true;
                                        Toast.show("Added to bookmarks", context, duration:Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
                                     }
                                     else{
-                                      var i = widget.id;
-                                      _deleteBookmark(i);
+
+                                      var id = widget.id;
+                                      if(id==null){
+                                        id = copyId;
+                                      }
+                                      _deleteBookmark(id);
+                                      _bookmarkadded = false;
                                       Toast.show("Removed from bookmarks", context, duration:Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
                                     }
                                   });
@@ -278,7 +294,8 @@ class _DetailsPageState extends State<DetailsPage> {
               print(_playing);
 
                 if(_playing == false){
-                  _speak(widget.newscontent);//
+                  var content = widget.newstitle+".\n"+widget.newscontent;
+                  _speak(content);//
                   if (this.mounted) {
                     setState(() {
                       _icon_play = Icon(Icons.stop,color: Colors.white,);
