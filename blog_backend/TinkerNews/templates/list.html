@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .container {
+
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title></title>
+
+</head>
+
+<body>
+  <br>
+   <div class="p-3 float-right"><a href="/logout">Logout</a></div>
+  <br>
+  <center>
+    <h2>TinkerBlog</h2>
+  </center>
+  <div class="container">
+   <ol>
+        {%  for no in data %}
+    <li>
+        <td> {{ no['title'] }} &nbsp <a href="/api/list/delete/{{no['key']}}">Delete</a> </td>
+    </li>
+    {%endfor%}
+   </ol>
+
+
+  </div>
+
+<div class="p-3 float-left"><a href="/api/add">back</a></div>
+</body>
+
+</html>

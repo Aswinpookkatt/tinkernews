@@ -17,12 +17,15 @@
 
 <body>
   <br>
+   <div class="p-3 float-right"><a href="/logout">Logout</a></div>
   <br>
+
   <center>
-    <h2>Blog for TinkerNews</h2>
+    <h2>TinkerBlog</h2>
   </center>
   <div class="container">
-    <form action="/api/addfn" method="post">
+
+    <form action="/api/addfunction" method="post">
       <div class=" form-group">
         <label for="exampleFormControlInput1">Title</label><input type="text" class="form-control" name="title" id="FormControlInput1" placeholder="Title" required>
       </div>
@@ -37,6 +40,7 @@
       <center><input class="btn btn-primary" type="submit" value="Add New Blog">
       </center>
     </form>
+      <a href="/api/list">View all posts</a>
   </div>
 </body>
 
