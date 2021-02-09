@@ -1,4 +1,4 @@
-# news_app
+# TinkerNews
 
 A new Flutter application.
 
