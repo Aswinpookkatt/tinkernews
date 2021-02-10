@@ -7,12 +7,12 @@ class Blog{
 
   List<NewsModel> blogdata = [];
 
-  // to fetch blog on a different device enter the network ip value here
 
-  var ip = "192.168.43.9";
 
+ // var ip = my netowork ip;  used when hosted locally
+ 
   Future<void> getBlog() async {
-    String url = "http://${ip}:5000/api/news";
+    //String url = "http://${ip}:5000/api/news";
     String hosted = "https://tinkernews.herokuapp.com/api/fetch";
 
     var response = await http.get(hosted);
