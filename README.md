@@ -15,4 +15,4 @@ I used Python Flask as the backend for the application and SQL database for the 
 
 
 ### App Feature
-* Visually impaired people can hear the news and blog using the text-to-speech feature, implemented using flutter_tts library.
+* You can now hear the latest news and your favourite blogs from tinkerers using the text-to-speech feature, implemented using flutter_tts library.
