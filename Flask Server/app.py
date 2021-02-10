@@ -6,7 +6,7 @@ import demjson,socket
 
 from DBConnection import Db
 
-deta = Deta('a0y9p8mu_WMGX3bx72JMwX6H7p3KzFUGEVWvyY1FB') # configure your Deta project
+deta = Deta('xxxxxxxxxxxxxxxxxxxxxxx') # addd the DETA project key here
 db = deta.Base('tinkerblog')  # access your DB
 app = Flask(__name__)
 app.secret_key="tinkernews"
