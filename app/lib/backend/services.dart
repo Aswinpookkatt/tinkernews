@@ -5,7 +5,7 @@ import 'dart:convert';
 var MonthPicker={"1":"January","2":"February","3":"March","4":"April","5":"May",
   "6":"June","7":"July","8":"August","9":"September","10":"October","11":"November","12":"December"};
 class News{
-  var apiKey ="06a533810b95411cb4a3e36426d3bca6";
+  var apiKey ="xxxx-xxxx-xxxx";//get api key from News Api and paste here
   List<NewsModel> news = [];
 
   Future<void> getNews(String category) async {
@@ -41,7 +41,7 @@ class News{
 
 class NewsForCategorie {
 
-  var apiKey = "06a533810b95411cb4a3e36426d3bca6";
+  var apiKey ="xxxx-xxxx-xxxx";//get api key from News Api and paste here
   List<NewsModel> news = [];
 
   Future<void> getNewsForCategory(String category) async {
